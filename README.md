@@ -15,8 +15,10 @@ For **UL** 2016, 2017 and 2018 data and MC **NanoAODv8** according to the [XPOG]
 cmsrel  CMSSW_10_6_20 # in principle not a constraint
 cd  CMSSW_10_6_20/src
 cmsenv
+source /cvmfs/cms.cern.ch/common/crab-setup.sh
 git cms-rebase-topic andrzejnovak:614nosort
-git clone https://github.com/cms-jet/PFNano.git PhysicsTools/PFNano
+git cms-merge-topic nurfikri89:port113XTo106X_nanojme_sizereduction
+git clone https://github.com/deinal/PFNano PhysicsTools/PFNano
 scram b -j 10
 cd PhysicsTools/PFNano/test
 ```
@@ -60,10 +62,18 @@ python PhysicsTools/NanoAOD/test/inspectNanoFile.py NANOAOD.root -s website_with
 
 ## Submission to CRAB
 
-Samples can be submitted to crab using the `submit_all.py` script. Run with `-h` option to see usage. Example can look like this:
+Samples can be submitted to crab using the `submit_all.py` script. Run with `-h` option to see usage. Test example can look like this:
 
 ```
 python submit_all.py -c nano_config.py -s T2_DE_RWTH -f datasets/text_list.txt  -o /store/user/$USER/PFNano/  --ext test --test -d crab_noinpts
+
+```
+
+and production like this:
+
+```
+
+python submit_all.py -c nano106Xv8_on_mini106X_2017_mc_NANO.py -f datasets/MC_QCD_UL2017.txt -d JMEPFNanoQCDFlat -o /store/group/phys_jetmet/$USER/JMEPFNanoQCDFlat -s T2_CH_CERN --ext JMEPFNano
 
 ```
 

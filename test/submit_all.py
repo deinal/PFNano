@@ -95,7 +95,7 @@ def main():
     config.JobType.maxMemoryMB = 5000 # Default is 2500 : Max I have used is 13000
     # minutes tied to not automatic splitting
     # config.JobType.maxJobRuntimeMin = 2750 #Default is 1315; 2750 minutes guaranteed to be available; Max I have used is 9000 
-    config.JobType.numCores = 1
+    config.JobType.numCores = 4
     config.JobType.allowUndistributedCMSSW = True
 
     config.section_("Debug")
@@ -103,7 +103,7 @@ def main():
 
     config.section_("Data")
     config.Data.inputDataset = None
-    config.Data.splitting = ''
+    config.Data.splitting = 'Automatic'
     config.Data.ignoreLocality = options.remote
     config.Data.publication = True if not options.test_only else False
     if options.test_only:
